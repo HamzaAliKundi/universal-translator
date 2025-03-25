@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --primary: #3B82F6;
+    --primary-light: #60A5FA;
+    --secondary: #FF4B8B;
+    --secondary-light: #FF6B9D;
+    --accent: #FFD93D;
+    --accent-light: #FFE169;
+    --background: #F0F7FF;
+    --foreground: #FFFFFF;
+    --text: #1F2937;
+    --text-light: #6B7280;
+  }
+
+  body {
+    @apply bg-[--background] text-[--text] antialiased;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-white rounded-2xl shadow-sm border border-gray-100/50 p-6 transition-all duration-200;
+  }
+
+  .card-hover {
+    @apply hover:shadow-lg hover:scale-[1.02] hover:border-blue-100;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-blue-600 to-pink-500 bg-clip-text text-transparent;
+  }
+
+  .stat-card {
+    @apply flex flex-col gap-2 bg-white rounded-2xl p-6 shadow-sm border border-gray-100/50;
+  }
+
+  .stat-value {
+    @apply text-2xl font-bold text-gray-900;
+  }
+
+  .stat-label {
+    @apply text-sm font-medium text-gray-500;
+  }
+
+  .button-primary {
+    @apply px-4 py-2 bg-[--primary] text-white rounded-xl hover:bg-[--primary-light] 
+           transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed
+           focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
+  }
+
+  .button-secondary {
+    @apply px-4 py-2 bg-[--secondary] text-white rounded-xl hover:bg-[--secondary-light]
+           transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed
+           focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-2 bg-white border border-gray-200 rounded-xl
+           focus:border-blue-500 focus:ring-2 focus:ring-blue-100
+           transition-all duration-200;
+  }
+}
