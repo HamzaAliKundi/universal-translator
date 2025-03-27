@@ -65,10 +65,24 @@ export default function App() {
   };
 
   const handleFileUpload = async (file: File) => {
-    const newDocument = await handleFileSelect(file);
-    if (newDocument) {
-      setSelectedDocument(newDocument);
-      loadDocuments(1);
+    try {
+      // Reset states for new upload
+      setResult(null);
+      setSelectedDocument(null);
+      
+      const newDocument = await handleFileSelect(file);
+      if (newDocument) {
+        setSelectedDocument(newDocument);
+        await loadDocuments(1); // Refresh document list
+        
+        // Reset file input by clearing the FileUpload component
+        const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
+        if (fileInput) {
+          fileInput.value = '';
+        }
+      }
+    } catch (error) {
+      console.error("Error uploading file:", error);
     }
   };
 
