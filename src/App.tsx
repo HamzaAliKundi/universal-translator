@@ -44,6 +44,7 @@ export default function App() {
   const [remainingsReq, setRemainingsReq] = useState(false);
   const [activeTab, setActiveTab] = useState<"chat" | "analysis">("chat");
 
+  
   const {
     status,
     result,
@@ -52,6 +53,15 @@ export default function App() {
     handlePreviewDocument,
     setResult,
   } = useFileProcessing(sourceLanguage, targetLanguage);
+
+  useEffect(() => {
+    const checkHasPaid = async () => {
+      const data = await hasPaid();
+      setIsPaid(data?.hasPaid);
+      setRemainingsReq(data?.remainingRequests);
+    };
+    checkHasPaid();
+  }, [isAuthenticated]);
 
   useEffect(() => {
     if (isAuthenticated) {
