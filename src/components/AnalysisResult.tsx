@@ -29,16 +29,16 @@ export function AnalysisResultView({
   onTabChange
 }: AnalysisResultViewProps) {
   return (
-    <div className="grid grid-cols-2 gap-6">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
       {/* Analysis Panel */}
       <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
+        <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 border-b border-gray-200">
           <div className="flex items-center gap-2">
-            <Languages className="w-5 h-5 text-blue-600" />
-            <h2 className="text-lg font-semibold text-gray-900">Analysis</h2>
+            <Languages className="w-4 sm:w-5 h-4 sm:h-5 text-blue-600" />
+            <h2 className="text-base sm:text-lg font-semibold text-gray-900">Analysis</h2>
           </div>
         </div>
-        <div className="p-6">
+        <div className="p-4 sm:p-6">
           <LanguageAnalysisView
             result={result}
             documentContent={documentContent}
@@ -52,17 +52,19 @@ export function AnalysisResultView({
 
       {/* Chat Panel */}
       <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
+        <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 border-b border-gray-200">
           <div className="flex items-center gap-2">
-            <MessageSquare className="w-5 h-5 text-blue-600" />
-            <h2 className="text-lg font-semibold text-gray-900">Chat Assistant</h2>
+            <MessageSquare className="w-4 sm:w-5 h-4 sm:h-5 text-blue-600" />
+            <h2 className="text-base sm:text-lg font-semibold text-gray-900">Chat Assistant</h2>
           </div>
         </div>
-        <div className="p-6">
+        <div className="p-4 sm:p-6">
           <ChatInterface
             documentContent={documentContent}
             apiKey={apiKey}
             analysisResult={result}
+            sourceLanguage={sourceLanguage}
+            targetLanguage={targetLanguage}
           />
         </div>
       </div>

@@ -138,7 +138,7 @@ export default function App() {
         onSignOut={handleSignOut}
       />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
         {connectionError && (
           <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg">
             <p className="text-sm text-red-600">{connectionError}</p>
@@ -151,8 +151,8 @@ export default function App() {
           </div>
         )}
 
-        <div className="space-y-8">
-          <div className="grid grid-cols-2 gap-4">
+        <div className="space-y-4 sm:space-y-6 lg:space-y-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <LanguageSelector
               value={sourceLanguage}
               onChange={setSourceLanguage}
@@ -194,13 +194,13 @@ export default function App() {
             </div>
           )}
 
-          <div className="grid grid-cols-2 gap-6">
-            <div className="space-y-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5 lg:gap-6">
+            <div className="space-y-4 sm:space-y-5 lg:space-y-6">
               <p className="text-xs font-serif text-neutral-700">
                 Remainings Requests : {remainingsReq}
               </p>
               {!isPaid ? (
-                <div className="border rounded-xl p-4 py-10 flex flex-col gap-8 text-center items-center justify-center bg-white">
+                <div className="border rounded-xl p-3 sm:p-4 py-6 sm:py-8 lg:py-10 flex flex-col gap-4 sm:gap-6 lg:gap-8 text-center items-center justify-center bg-white">
                   <p className="text-sm text-neutral-500 font-sans">
                     You have reached the limit; you need to pay for more.
                   </p>
@@ -223,7 +223,7 @@ export default function App() {
               )}
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               <DocumentList
                 documents={documentState.documents}
                 selectedDocuments={documentState.selectedDocuments}

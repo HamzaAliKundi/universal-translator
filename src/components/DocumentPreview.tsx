@@ -142,23 +142,23 @@ export function DocumentPreview({
       className="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden"
     >
       {/* Header */}
-      <div className="px-6 py-4 border-b border-gray-200 flex items-center justify-between bg-gradient-to-r from-blue-50 to-indigo-50">
-        <div className="flex items-center gap-3">
-          <h2 className="text-lg font-semibold text-gray-900">
+      <div className="px-4 sm:px-6 py-3 sm:py-4 border-b border-gray-200 flex flex-col sm:flex-row items-start sm:items-center justify-between bg-gradient-to-r from-blue-50 to-indigo-50 space-y-3 sm:space-y-0">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <h2 className="text-base sm:text-lg font-semibold text-gray-900">
             Document Preview
           </h2>
-          <span className="text-sm text-gray-500">
+          <span className="text-xs sm:text-sm text-gray-500">
             {`${new Date(
               document?.uploadDate || document?.createdAt
             ).toLocaleDateString("en-US")}`}
           </span>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
           <button
             onClick={handleShare}
-            className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-gray-200 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+            className="flex items-center gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full bg-white border border-gray-200 text-xs sm:text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
           >
-            <Share2 className="w-4 h-4" />
+            <Share2 className="w-3 sm:w-4 h-3 sm:h-4" />
             {shareSupported ? "Share" : "Copy"}
           </button>
           {copyStatus === "copied" && (
@@ -166,7 +166,7 @@ export function DocumentPreview({
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
-              className="absolute top-16 right-4 bg-black bg-opacity-80 text-white text-sm px-3 py-1 rounded-full"
+              className="absolute top-16 right-4 bg-black bg-opacity-80 text-white text-xs sm:text-sm px-2 sm:px-3 py-1 rounded-full"
             >
               Copied to clipboard!
             </motion.div>
@@ -174,25 +174,25 @@ export function DocumentPreview({
           {documentData?.translatedText && (
             <button
               onClick={() => setShowTranslation(!showTranslation)}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-gray-200 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+              className="flex items-center gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full bg-white border border-gray-200 text-xs sm:text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors min-w-[80px] sm:min-w-[120px]"
             >
-              <Languages className="w-4 h-4" />
-              {showTranslation ? "Show Original" : "Show Translation"}
+              <Languages className="w-3 sm:w-4 h-3 sm:h-4" />
+              {showTranslation ? "Original" : "Translate"}
             </button>
           )}
           <button
             onClick={handleGeneratePDF}
             disabled={isGeneratingPDF || isLoading || !documentData}
-            className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition-colors disabled:opacity-50"
+            className="flex items-center gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full bg-blue-600 text-white text-xs sm:text-sm font-medium hover:bg-blue-700 transition-colors disabled:opacity-50 min-w-[80px] sm:min-w-[120px]"
           >
-            <Download className="w-4 h-4" />
-            Generate PDF
+            <Download className="w-3 sm:w-4 h-3 sm:h-4" />
+            PDF
           </button>
           <button
             onClick={onClose}
-            className="p-1.5 text-gray-400 hover:text-gray-500 rounded-full hover:bg-gray-100"
+            className="p-1 sm:p-1.5 text-gray-400 hover:text-gray-500 rounded-full hover:bg-gray-100"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 sm:w-5 h-4 sm:h-5" />
           </button>
         </div>
       </div>

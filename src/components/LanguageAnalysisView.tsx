@@ -102,9 +102,9 @@ export function LanguageAnalysisView({
   return (
     <div className="space-y-6">
       {/* Language Controls */}
-      <div className="flex items-center justify-between bg-white rounded-lg shadow-sm border border-gray-200 p-4">
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-2">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-white rounded-lg shadow-sm border border-gray-200 p-4 space-y-4 sm:space-y-0">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full sm:w-auto">
+          <div className="flex items-center gap-2 flex-wrap">
             <Globe className="w-5 h-5 text-gray-500" />
             <span className="text-sm font-medium text-gray-700">
               {activeLanguage === 'source' ? 'Source' : 'Target'} Language:
@@ -114,20 +114,22 @@ export function LanguageAnalysisView({
             </span>
           </div>
           {detectedLanguage && detectedLanguage !== sourceLanguage && (
-            <span className="text-sm text-gray-500">
+            <span className="text-sm text-gray-500 block sm:inline">
               Detected: {detectedLanguage.toUpperCase()}
             </span>
           )}
         </div>
         
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 w-full sm:w-auto">
           <button
             onClick={handleTranslate}
             disabled={isTranslating}
-            className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
+            className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
           >
             <Languages className="w-4 h-4" />
-            {isTranslating ? 'Translating...' : 'Translate'}
+            <span className="whitespace-nowrap">
+              {isTranslating ? 'Translating...' : 'Translate'}
+            </span>
           </button>
           <button
             onClick={onLanguageSwitch}
