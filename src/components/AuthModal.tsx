@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { validatePassword, validateEmail } from "../utils/validation";
-import { signUp, signIn, checkUsername } from "../utils/api";
+import { signUp, signIn, checkUsername, resendVerification } from "../utils/api";
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -42,6 +42,7 @@ export function AuthModal({
   const [lockTimer, setLockTimer] = useState(0);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [verificationSent, setVerificationSent] = useState(false);
+  const [resendSuccess, setResendSuccess] = useState(false);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -78,6 +79,7 @@ export function AuthModal({
     setError(null);
     setSuccessMessage(null);
     setVerificationSent(false);
+    setResendSuccess(false);
   };
 
   const handleModalClose = () => {
@@ -99,6 +101,8 @@ export function AuthModal({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (isLocked) return;
+
+    localStorage.setItem("email", email);
 
     setError(null);
     setSuccessMessage(null);
@@ -178,6 +182,24 @@ export function AuthModal({
     }
   }, []);
 
+  const handleResendVerification = async () => {
+    try {
+      const email = localStorage.getItem("email");
+      if (!email) {
+        setError("No email found. Please try signing up again.");
+        return;
+      }
+      await resendVerification(email);
+      setResendSuccess(true);
+      setTimeout(() => {
+        setResendSuccess(false);
+      }, 3000);
+      setSuccessMessage("Verification email resent successfully!");
+    } catch (error: any) {
+      setError(error.message || "Failed to resend verification email");
+    }
+  };
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -224,15 +246,22 @@ export function AuthModal({
                         Please check your inbox and click the link to verify
                         your account.
                       </p>
-                      <button
-                        className="text-blue-600 hover:text-blue-700 text-sm font-medium mt-4"
-                        onClick={() => {
-                          // Add resend verification logic here
-                          console.log("Resend verification");
-                        }}
-                      >
-                        Didn't receive the email? Click here to resend
-                      </button>
+                      {resendSuccess ? (
+                        <motion.p
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          className="text-green-600 font-medium"
+                        >
+                          Verification email has been resent!
+                        </motion.p>
+                      ) : (
+                        <button
+                          className="text-blue-600 hover:text-blue-700 text-sm font-medium mt-4"
+                          onClick={handleResendVerification}
+                        >
+                          Didn't receive the email? Click here to resend
+                        </button>
+                      )}
                     </div>
                   ) : (
                     <p className="text-gray-600">{successMessage}</p>

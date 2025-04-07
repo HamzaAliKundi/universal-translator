@@ -46,6 +46,18 @@ export async function checkUsername(username: string) {
   }
 }
 
+export async function resendVerification(email: string) {
+  try {
+    const response = await axios.get(
+      `${BASE_URL}/api/auth/resend-verification?email=${email}`
+    );
+    return response.data;
+  } catch (error: any) {
+    const errorMessage = error.response?.data?.message || "Failed to resend verification email";
+    throw new Error(errorMessage);
+  }
+}
+
 export async function getUser(token: string): Promise<any> {
   try {
     const response = await axios.get(`${BASE_URL}/api/auth/get-user`, {
